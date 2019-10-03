@@ -1,0 +1,54 @@
+.toolbar {
+  width: 100%;
+  background-color: #F3F7FA;
+  height: 50px;
+  display: flex;
+  justify-content: stretch;
+  flex-direction: row;
+  align-items: center;
+  padding: 5px;
+}
+
+.menu {
+  position: relative;
+  padding: 10px;
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+
+  .popover {
+    pointer-events: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #F3F7FA;
+    opacity: 0;
+    transition: all 0.1s;
+
+    .item {
+      padding: 15px;
+      transition: all 0.1s;
+      background-color: rgba(0, 0, 0, 0.0);
+      white-space: nowrap;
+      cursor: pointer;
+      user-select: none;
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+      }
+
+      &:active {
+        color: #ffffff;
+        background-color: rgb(74, 129, 231);
+      }
+    }
+  }
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    .popover {
+      pointer-events: all;
+      opacity: 1;
+    }
+  }
+}
