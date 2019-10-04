@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "concurrently \"ng serve --port=8964\" \"wait-on http://localhost:8964 && nw . --enable-transparent-visuals --disable-gpu --disable-gpu-compositing --force-cpu-draw\"",
+    "start": "concurrently \"ng serve --port=8964\" \"wait-on http://localhost:8964 && nw .\"",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
@@ -19,7 +19,7 @@
   "window": {
     "width": 200,
     "height": 200,
-    "always_on_top": true,
+    "always_on_top": false,
     "frame": false,
     "transparent": true,
     "kiosk": false,

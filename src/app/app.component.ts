@@ -27,17 +27,35 @@ export class AppComponent implements OnInit {
 
   openDemo() {
     const puppeteer = window.nw.require('puppeteer');
-    console.log("Hello World!", );
     puppeteer.launch({
       headless: false,
-      ignoreDefaultArgs: ['--mute-audio', '--enable-automation'],
+      pipe: true,
+      dumpio: true,
+      defaultViewport: null,
+      args: [
+        '--disable-extensions',
+        '--disable-popup-blocking',
+        '--disable-crash-reporter',
+        'https://google.com',
+      ],
+      env: {
+        "GOOGLE_API_KEY": "no",
+        "GOOGLE_DEFAULT_CLIENT_ID": "no",
+        "GOOGLE_DEFAULT_CLIENT_SECRET": "no",
+      },
+      // ignoreDefaultArgs: ['--mute-audio', '--enable-automation', 'about:blank'],
+      ignoreDefaultArgs: true,
     }).then(async browser => {
-      const blank = (await browser.pages())[0];
-      await blank.close();
-      const page = await browser.newPage();
-      await page.setViewport({ width: 1280, height: 800 });
+      const pages = await browser.pages();
+      let page = pages[0];
+      // await page.close(); page = null;
+      if (!page) {
+        page = await browser.newPage();
+        pages.push(page);
+      }
       await page.goto('https://google.com');
       await new Promise(r => setTimeout(r, 5000));
+      await new Promise(r => setTimeout(r, 10000));
       await browser.close();
     });
   }
